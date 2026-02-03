@@ -15,7 +15,7 @@ func Run() {
 	router := gin.Default()
 
 	// Listerning to all the routes
-	HandleRoutes();
+	HandleRoutes(router);
 
 	// Running the server 
 	router.Run(fmt.Sprintf(":%d", Port))
