@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"abdul-ghaffar01/notes-server/internal/server"
+
+)
 
 func main(){
-	fmt.Println("Hello, World!")
+	// Starting the server
+	server.Run()
 }
