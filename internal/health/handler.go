@@ -7,5 +7,5 @@ import (
 
 
 func HealthCheckHandler(c *gin.Context){
-	c.JSON(http.StatusOK, gin.H{"success": "okay"})
+	c.JSON(http.StatusOK, gin.H{"success": true})
 }
