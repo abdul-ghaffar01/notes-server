@@ -29,7 +29,7 @@ func (s *Service) Create(title, description string) (Note, error) {
 	// Creating a new id for note
 	id := uuid.NewString()
 
-	// Creating the note 
+	// Creating the note
 	newNote := Note{ID: id, Title: title, Description: description, Time: time.Now()}
 
 	// Appending the note into notes
@@ -37,4 +37,15 @@ func (s *Service) Create(title, description string) (Note, error) {
 
 	return newNote, nil
 
+}
+
+
+// GetAllNotes returns copy of all the notes 
+func (s *Service) GetAllNotes() []Note {
+	result := make([]Note, 0, len(s.notes))
+
+	for _, note := range s.notes {
+		result = append(result, note)
+	}
+	return result
 }

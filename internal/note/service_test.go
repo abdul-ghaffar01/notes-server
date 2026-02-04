@@ -3,8 +3,8 @@ package note
 import (
 	"testing"
 )
-
-func TestCreateService(t *testing.T) {
+// Testing create service 
+func TestCreate_Service(t *testing.T) {
 	tests := []struct {
 		name        string
 		title       string
@@ -60,4 +60,10 @@ func TestCreateService(t *testing.T) {
 			}
 		})
 	}
+}
+
+
+// Tests that internal state of serive is immutable
+func TestGetAllNotes_Service(t *testing.T){
+
 }
