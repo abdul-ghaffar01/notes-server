@@ -65,5 +65,23 @@ func TestCreate_Service(t *testing.T) {
 
 // Tests that internal state of serive is immutable
 func TestGetAllNotes_Service(t *testing.T){
+	service := NewService()
 
+	// Creating a new note 
+	note, err := service.Create("This is the title", "This is the description of note")
+	
+	if err != nil {
+		t.Fatalf("Error in Create->Service")
+		return
+	}
+
+	notes := service.GetAllNotes()
+
+	notes = append(notes, note)
+
+	newNotes := service.GetAllNotes()
+
+	if len(notes) == len(newNotes) {
+		t.Fatalf("Service (GetAllNotes): Internal service should not be modified.")
+	}
 }
