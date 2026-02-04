@@ -22,8 +22,8 @@ func (h *Handler) Create(c *gin.Context) {
 
 	// Variable to take body of the req
 	var req struct {
-		Title       string	`json:"title"`
-		Description string	`json:"description"`
+		Title       string `json:"title"`
+		Description string `json:"description"`
 	}
 
 	// Taking title and description from the body of req
@@ -43,4 +43,11 @@ func (h *Handler) Create(c *gin.Context) {
 	// returning the note on successfull creation
 	c.JSON(http.StatusCreated, gin.H{"note": note})
 
+}
+
+// Handler to get all notes
+func (h *Handler) GetAllNotes(c *gin.Context) {
+	notes := h.service.GetAllNotes()
+
+	c.JSON(http.StatusOK, gin.H{"notes": notes})
 }
