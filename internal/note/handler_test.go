@@ -14,6 +14,7 @@ import (
 func setupRouter(h *Handler) *gin.Engine {
 	router := gin.New()
 	router.POST("/create", h.Create)
+	router.GET("/notes", h.GetAllNotes)
 	return router
 }
 
@@ -95,4 +96,35 @@ func TestCreate_Handler(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Testing /notes handler
+func TestGetAllNotes_Handler(t *testing.T) {
+	service := NewService()
+	service.Create("The very first note", "The description of the note")
+	service.Create("The second note", "The description of the note 2")
+	handler := NewHandler(service)
+	router := setupRouter(handler)
+
+	req := httptest.NewRequest(http.MethodGet, "/notes", nil)
+	rec := httptest.NewRecorder()
+
+	router.ServeHTTP(rec, req)
+
+	var resp []Note
+
+	// Checking for return code
+	if rec.Code != http.StatusOK{
+		t.Errorf("Expected code %d but got %d", http.StatusOK, rec.Code)
+	}
+
+	// checking if the returning json is valid array of notes
+	if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
+		t.Errorf("Got unexpected json response")
+	}
+
+	if len(resp) != 2 {
+		t.Errorf("Expected 2 notes but got %d", len(resp))
+	}
+
 }

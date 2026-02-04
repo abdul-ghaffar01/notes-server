@@ -20,4 +20,5 @@ func HandleRoutes(router *gin.Engine){
 
 	router.POST("/create", handler.Create)
 	
+	router.GET("/notes", handler.GetAllNotes)
 }

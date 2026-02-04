@@ -49,5 +49,5 @@ func (h *Handler) Create(c *gin.Context) {
 func (h *Handler) GetAllNotes(c *gin.Context) {
 	notes := h.service.GetAllNotes()
 
-	c.JSON(http.StatusOK, gin.H{"notes": notes})
+	c.JSON(http.StatusOK, notes)
 }
